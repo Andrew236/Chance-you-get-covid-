@@ -23,12 +23,75 @@ statepop_dict = {
     'vi': 106235, 'wa': 7614893, 'wv': 1792147, 'wi': 5822434, 'wy': 578759
     }
 
+us_state_abbrev = {
+    'Alabama': 'AL',
+    'Alaska': 'AK',
+    'American Samoa': 'AS',
+    'Arizona': 'AZ',
+    'Arkansas': 'AR',
+    'California': 'CA',
+    'Colorado': 'CO',
+    'Connecticut': 'CT',
+    'Delaware': 'DE',
+    'District of Columbia': 'DC',
+    'Florida': 'FL',
+    'Georgia': 'GA',
+    'Guam': 'GU',
+    'Hawaii': 'HI',
+    'Idaho': 'ID',
+    'Illinois': 'IL',
+    'Indiana': 'IN',
+    'Iowa': 'IA',
+    'Kansas': 'KS',
+    'Kentucky': 'KY',
+    'Louisiana': 'LA',
+    'Maine': 'ME',
+    'Maryland': 'MD',
+    'Massachusetts': 'MA',
+    'Michigan': 'MI',
+    'Minnesota': 'MN',
+    'Mississippi': 'MS',
+    'Missouri': 'MO',
+    'Montana': 'MT',
+    'Nebraska': 'NE',
+    'Nevada': 'NV',
+    'New Hampshire': 'NH',
+    'New Jersey': 'NJ',
+    'New Mexico': 'NM',
+    'New York': 'NY',
+    'North Carolina': 'NC',
+    'North Dakota': 'ND',
+    'Northern Mariana Islands': 'MP',
+    'Ohio': 'OH',
+    'Oklahoma': 'OK',
+    'Oregon': 'OR',
+    'Pennsylvania': 'PA',
+    'Puerto Rico': 'PR',
+    'Rhode Island': 'RI',
+    'South Carolina': 'SC',
+    'South Dakota': 'SD',
+    'Tennessee': 'TN',
+    'Texas': 'TX',
+    'Utah': 'UT',
+    'Vermont': 'VT',
+    'Virgin Islands': 'VI',
+    'Virginia': 'VA',
+    'Washington': 'WA',
+    'West Virginia': 'WV',
+    'Wisconsin': 'WI',
+    'Wyoming': 'WY'
+}
+
 
 def get_covid_per_state(entry1):
+    if len(entry1) > 2:
+        entry1 = us_state_abbrev[entry1.capitalize()].lower()
+        entry1.lower()
+        print(entry1)
     url = 'https://api.covidtracking.com/v1/states/'\
           '{}/current.json'.format(entry1)
 
-    if entry1 not in statepop_dict:
+    if entry1 not in statepop_dict or entry1 not in us_state_abbrev:
         data_label['text'] = "Please enter a valid abbreviated state ex: or"
     response = requests.get(url)
     covid_cases_state = response.json()['positive']
@@ -38,6 +101,7 @@ def get_covid_per_state(entry1):
     FinalStats = round((100 * Stats), 3)
     data_label['text'] = "Your chances of getting Covid in"\
         "{} is: {} percent ".format(entry1.upper(), FinalStats)
+
 
 HEIGHT = 700
 WIDTH = 900
@@ -83,7 +147,7 @@ label.place(
 
 label_two = tk.Label(
     root,
-    text="Enter a state abbreviation below EX: ca",
+    text="Enter a state below!",
     bg="white",
     fg="black"
 )
@@ -112,3 +176,4 @@ data_label.place(
 )
 
 root.mainloop()
+
