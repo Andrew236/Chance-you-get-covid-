@@ -99,17 +99,19 @@ def get_covid_per_state(entry1):
     population = statepop_dict[entry1]
     Stats = (covid_cases_state / population)
     FinalStats = round((100 * Stats), 3)
-    data_label['text'] = "Your chances of getting Covid in"\
-        "{} is: {} percent ".format(entry1.upper(), FinalStats)
+    data_label['text'] = "Your chances of getting Covid in "\
+        "{} is: {} percent \n in other words we can also say "\
+            "that {} percent of people "\
+                "in {} have covid-19".format(entry1.upper(), FinalStats,FinalStats,entry1.upper())
 
 
-HEIGHT = 700
+HEIGHT = 600
 WIDTH = 900
 root = tk.Tk()
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
-img = ImageTk.PhotoImage(Image.open("covid.jpg"))
+img = ImageTk.PhotoImage(Image.open("covid4.jpg"))
 main_label = tk.Label(root, image=img)
 main_label.place(relwidth=1, relheight=1)
 
@@ -122,7 +124,7 @@ button = tk.Button(
 )
 
 button.place(
-    relx=0.37,
+    relx=0.58,
     rely=0.35,
     height=50,
     width=200
@@ -131,17 +133,16 @@ button.place(
 
 label = tk.Label(
     root,
-    text=("Enter a state to see what"
-          "your chances of getting covid-19 are"),
+    text=("Covid Statistics lookup"),
     fg="white",
-    bg="#800000",
+    bg="#b366ff",
     font=("Helvetica", 12)
 )
 
 label.place(
-    relx=0.2,
+    relx=0.48,
     rely=0.1,
-    width=500,
+    width=400,
     height=50
 )
 
@@ -153,7 +154,7 @@ label_two = tk.Label(
 )
 
 label_two.place(
-    relx=0.35,
+    relx=0.57,
     rely=0.2,
     width=225
 )
@@ -161,17 +162,19 @@ label_two.place(
 entry_one = tk.Entry(root)
 
 entry_one.place(
-    relx=0.4,
+    relx=0.62,
     rely=0.25
 )
 data_label = tk.Label(
     root,
-    bg="white")
+    bg="#0d001a",
+    fg="white")
+    
 
 data_label.place(
-    relx=0.15,
+    relx=0.40,
     rely=0.65,
-    width=600,
+    width=500,
     height=200
 )
 
